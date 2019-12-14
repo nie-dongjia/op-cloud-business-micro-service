@@ -1,0 +1,53 @@
+  
+spring:
+  datasource:
+    url: jdbc:mysql://mysql.host:3306/OP_Cloud?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 1
+    minIdle: 1
+    maxActive: 2
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+#  redis 配置
+  redis:
+    host: redis.host
+    port: 6379
+    database: 1
+    pool: 
+      # 连接池中的最大空闲连接
+      max-idle: 100
+      # 连接池中的最小空闲连接
+      min-idle: 8
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 1000
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1  
+      # 连接超时时间（毫秒）
+      timeout: 0 
+   
+   
+  
+eureka:
+  client:
+    serviceUrl:
+    # defaultZone 为默认的 Zone，来源于 AWS 的概念 .
+      defaultZone: http://localhost:8001/op-cloud-eureka-server-app/eureka/  # Eureka Server 的注册地址
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+server:
+  port: 10002
+      
+logging:
+  config: classpath:logback-dev.xml

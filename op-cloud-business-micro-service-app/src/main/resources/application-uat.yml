@@ -1,0 +1,24 @@
+
+eureka:
+  client:
+    serviceUrl:
+    # defaultZone 为默认的 Zone，来源于 AWS 的概念 .
+      defaultZone: http://localhost:8001/op-cloud-eureka-server-app/eureka/  # Eureka Server 的注册地址
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+server:
+  port: 10002
+
+
+      
+logging:
+  config: classpath:logback-uat.xml
+
+  
+  
+  
+  
+  
+  
+  
+  
